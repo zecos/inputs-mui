@@ -1,8 +1,8 @@
 {
-  "name": "inputs-md",
-  "version": "1.0.0",
+  "name": "@zecos/inputs-md",
+  "version": "0.0.0",
   "description": "rapidly prototype react material design form inputs",
-  "author": "zecos",
+  "author": "Zane Hitchcox",
   "license": "MIT",
   "repository": "zecos/inputs-md",
   "main": "dist/index.js",
@@ -21,8 +21,8 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {},
   "peerDependencies": {
+    "@material-ui/core": "^4.x.x",
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
