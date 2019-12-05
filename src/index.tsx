@@ -44,7 +44,7 @@ export const text = createInput(({helpers, props, state}) => {
 })
 
 const renderOption = ([label, value]) => (
-  <MenuItem value={value}>{label}</MenuItem>
+  <MenuItem key={value} value={value}>{label}</MenuItem>
 )
 export const select = createInput(({helpers, props, state}) => {
   const {
@@ -75,8 +75,9 @@ export const select = createInput(({helpers, props, state}) => {
 
 const renderRadio = ([label, value, radioProps]) => (
   <FormControlLabel
+    key={value}
     value={value}
-    control={<Radio {...radioProps} />}
+    control={<Radio color="primary" {...radioProps} />}
     label={label}
   />
 )
@@ -86,7 +87,7 @@ export const radio = createInput(({helpers, props, state}) => {
     name,
     onChange,
     onBlur,
-    kebab,
+    title,
   } = helpers
   const { value } = state
   
@@ -94,7 +95,7 @@ export const radio = createInput(({helpers, props, state}) => {
 
   return (
     <FormControl component="fieldset" margin="normal">
-      <FormLabel component="legend">kebab{kebab}</FormLabel>
+      <FormLabel component="legend">{title}</FormLabel>
       <RadioGroup
         aria-label={label}
         name={name}
@@ -104,9 +105,10 @@ export const radio = createInput(({helpers, props, state}) => {
         {...radioGroupProps}
       >
         {Object.entries(options).map(([label, key]) => {
-          renderRadio([label, key, radioProps])
+          return renderRadio([label, key, radioProps])
         })}
       </RadioGroup>
     </FormControl>
   )
 })
+
