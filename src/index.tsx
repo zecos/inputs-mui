@@ -1,10 +1,6 @@
 import * as React from 'react'
-import styles from "./styles.css"
 import { createInput } from "@zecos/inputs"
-
-import TextField from "@material-ui/core/TextField"
-import { Select, MenuItem, FormControl, InputLabel } from '@material-ui/core'
-
+import { TextField, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormLabel, FormControlLabel, Radio } from '@material-ui/core'
 
 const getErrorInfo = state => {
   const {errors, touched} = state
@@ -31,7 +27,7 @@ export const text = createInput(({helpers, props, state}) => {
 
 
   return (
-    <div className={styles.textFieldContainer}>
+    <div>
       <TextField
         {...getErrorInfo(state)}
         label={label}
@@ -75,4 +71,42 @@ export const select = createInput(({helpers, props, state}) => {
       {Object.entries(options).map(renderOption)}
     </Select>
   </FormControl>
+})
+
+const renderRadio = ([label, value, radioProps]) => (
+  <FormControlLabel
+    value={value}
+    control={<Radio {...radioProps} />}
+    label={label}
+  />
+)
+export const radio = createInput(({helpers, props, state}) => {
+  const {
+    label,
+    name,
+    onChange,
+    onBlur,
+    kebab,
+  } = helpers
+  const { value } = state
+  
+  const { options, radioProps, ...radioGroupProps } = props
+
+  return (
+    <FormControl component="fieldset" margin="normal">
+      <FormLabel component="legend">kebab{kebab}</FormLabel>
+      <RadioGroup
+        aria-label={label}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        {...radioGroupProps}
+      >
+        {Object.entries(options).map(([label, key]) => {
+          renderRadio([label, key, radioProps])
+        })}
+      </RadioGroup>
+    </FormControl>
+  )
 })

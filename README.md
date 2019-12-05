@@ -1,31 +1,5 @@
-# inputs-md
+### inputs-mui
 
-> rapidly prototype react material design form inputs
+`@zecos/inputs-mui` is a library for rapidly creating form inputs utilizing the [`@material-ui/core`](https://npmjs.com/@material-ui/core) module. `@material-ui/core` is a peer dependency, so there is no redundant code in your bundle (as well as [`react`](https://npmjs.com/react)).
 
-[![NPM](https://img.shields.io/npm/v/inputs-md.svg)](https://www.npmjs.com/package/inputs-md) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-## Install
-
-```bash
-npm install --save inputs-md
-```
-
-## Usage
-
-```tsx
-import * as React from 'react'
-
-import MyComponent from 'inputs-md'
-
-class Example extends React.Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
-}
-```
-
-## License
-
-MIT © [zecos](https://github.com/zecos)
+#### Usage
