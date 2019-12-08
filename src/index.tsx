@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { createInput } from "@zecos/inputs"
-import { TextField, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormLabel, FormControlLabel, Radio } from '@material-ui/core'
+import { createInput, createLayout } from "@zecos/inputs"
+import { TextField, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormLabel, FormControlLabel, Radio, Checkbox, FormGroup, FormHelperText, Switch } from '@material-ui/core'
+
 
 const getErrorInfo = state => {
   const {errors, touched} = state
@@ -15,7 +16,7 @@ const getErrorInfo = state => {
   return errInfo
 }
 
-export const text = createInput(({helpers, props, state}) => {
+export const useText = createInput(({helpers, props, state}) => {
   const {
     onChange,
     onBlur,
@@ -24,7 +25,6 @@ export const text = createInput(({helpers, props, state}) => {
   } = helpers
   
   const { value } = state
-
 
   return (
     <div>
@@ -46,7 +46,7 @@ export const text = createInput(({helpers, props, state}) => {
 const renderOption = ([label, value]) => (
   <MenuItem key={value} value={value}>{label}</MenuItem>
 )
-export const select = createInput(({helpers, props, state}) => {
+export const useSelect = createInput(({helpers, props, state}) => {
   const {
     onChange,
     onBlur,
@@ -81,7 +81,7 @@ const renderRadio = ([label, value, radioProps]) => (
     label={label}
   />
 )
-export const radio = createInput(({helpers, props, state}) => {
+export const useRadio = createInput(({helpers, props, state}) => {
   const {
     label,
     name,
@@ -108,6 +108,76 @@ export const radio = createInput(({helpers, props, state}) => {
           return renderRadio([label, key, radioProps])
         })}
       </RadioGroup>
+    </FormControl>
+  )
+})
+
+export const useCheckbox = createInput(({helpers, props, actions, state}) => {
+  const {
+    id,
+    label,
+  } = helpers
+
+  const { value } = state
+  const boolVal = Boolean(value)
+
+  return (
+    <FormControlLabel
+      id={id}
+      control={
+        <Checkbox
+          checked={boolVal}
+          onChange={() => actions.setValue(!boolVal)}
+          value={boolVal}
+          color="primary"
+          {...props}
+        />
+      }
+      label={label}
+    />
+  )
+})
+
+export const useSwitch = createInput(({helpers, props, actions, state}) => {
+  const {
+    id,
+    label,
+  } = helpers
+  const { value } = state
+  const boolVal = Boolean(value)
+
+  return (
+    <FormControlLabel
+      id={id}
+      control={
+        <Switch
+          checked={boolVal}
+          onChange={() => actions.setValue(!boolVal)}
+          value={boolVal}
+          color="primary"
+          {...props}
+        />
+      }
+      label={label}
+    />
+  )
+})
+
+const renderErrors = (error, i)=> <FormHelperText key={i}>{error.toString()}</FormHelperText>
+export const useGroup = createLayout(({props, inputs, errors, helpers}) => {
+  const Inputs = inputs
+    .map(input => {
+      const {Cmpt, meta} = input
+      return <Cmpt key={meta.name} />
+    })
+  
+  return (
+    <FormControl component="fieldset" error={!!errors.length}>
+      <FormLabel component="legend">{helpers.title}</FormLabel>
+      <FormGroup row={props.row || false}>
+        {Inputs}
+      </FormGroup>
+      {errors.map(renderErrors)}
     </FormControl>
   )
 })
