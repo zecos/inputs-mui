@@ -14,6 +14,7 @@ import {
   FormGroup,
   FormHelperText,
   Switch,
+  Slider,
 } from '@material-ui/core'
 import DateFnsUtils from '@date-io/date-fns'
 
@@ -244,7 +245,7 @@ export const useDatePicker = createInput(({helpers, props, actions, state}) => {
         variant="inline"
         id={id}
         label={label}
-        format="/MM/dd/yyyy"
+        format="MM/dd/yyyy"
         value={dateVal}
         onChange={newDate => actions.setValue(newDate)}
         KeyboardButtonProps={{
@@ -254,5 +255,33 @@ export const useDatePicker = createInput(({helpers, props, actions, state}) => {
       />
     </MuiPickersUtilsProvider>
   )
+})
+
+export const useSlider = createInput(({helpers, props, actions, state}) => {
+  const {
+    id,
+    label,
+  } = helpers
+
+  const {value} = state
+  let heightStyle = {}
+  if (props.orientation === "vertical") {
+    const height = typeof props.height !== "undefined" ? props.height : 300
+    heightStyle = {height, paddingBottom: 0, paddingTop: 12}
+  }
+
+  return <>
+    <FormLabel component="legend">{label}</FormLabel>
+    <div style={heightStyle}>
+    <Slider
+      value={value}
+      onChange={(_e, newVal) => actions.setValue(newVal)}
+      aria-labelledby={id}
+      getAriaValueText={() => value.toString()}
+      step={1}
+      {...props}
+    />
+    </div>
+    </>
 })
 
