@@ -1,6 +1,27 @@
 import * as React from 'react'
 import { createInput, createLayout } from "@zecos/inputs"
-import { TextField, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormLabel, FormControlLabel, Radio, Checkbox, FormGroup, FormHelperText, Switch } from '@material-ui/core'
+import {
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  RadioGroup,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+  Checkbox,
+  FormGroup,
+  FormHelperText,
+  Switch,
+} from '@material-ui/core'
+import DateFnsUtils from '@date-io/date-fns'
+
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+} from '@material-ui/pickers'
 
 
 const getErrorInfo = state => {
@@ -167,8 +188,8 @@ const renderErrors = (error, i)=> <FormHelperText key={i}>{error.toString()}</Fo
 export const useGroup = createLayout(({props, inputs, errors, helpers}) => {
   const Inputs = inputs
     .map(input => {
-      const {Cmpt, meta} = input
-      return <Cmpt key={meta.name} />
+      const {Cmpt, helpers} = input
+      return <Cmpt key={helpers.name} />
     })
   
   return (
@@ -179,6 +200,59 @@ export const useGroup = createLayout(({props, inputs, errors, helpers}) => {
       </FormGroup>
       {errors.map(renderErrors)}
     </FormControl>
+  )
+})
+
+export const useTimePicker = createInput(({helpers, props, actions, state}) => {
+  const {
+    id,
+    label,
+  } = helpers
+  const {value} = state
+  const dateVal = new Date(value)
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <KeyboardTimePicker
+        margin="normal"
+        id={id}
+        variant="inline"
+        label={label}
+        value={dateVal}
+        onChange={newDate => actions.setValue(newDate)}
+        KeyboardButtonProps={{
+          'aria-label': 'change time',
+        }}
+        {...props}
+      />
+    </MuiPickersUtilsProvider>
+  );
+})
+
+export const useDatePicker = createInput(({helpers, props, actions, state}) => {
+  const {
+    id,
+    label,
+  } = helpers
+  const {value} = state
+  const dateVal = new Date(value)
+
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <KeyboardDatePicker
+        margin="normal"
+        variant="inline"
+        id={id}
+        label={label}
+        format="/MM/dd/yyyy"
+        value={dateVal}
+        onChange={newDate => actions.setValue(newDate)}
+        KeyboardButtonProps={{
+          'aria-label': 'change date',
+        }}
+        {...props}
+      />
+    </MuiPickersUtilsProvider>
   )
 })
 
