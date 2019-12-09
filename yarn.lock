@@ -842,6 +842,18 @@
   dependencies:
     "@types/react" "*"
 
+"@zecos/fieldz@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@zecos/fieldz/-/fieldz-0.0.8.tgz#ee2bd2c06b505b671767048e84e15b07e292f4a5"
+  integrity sha512-xSs5KfTqlHPLybYmPCsoMXP2YGIsM8GajeznRnKIwHdLbqZGle5AMocJHIbC4Rwag8By4Jg4czwqKDIgoa4HnQ==
+  dependencies:
+    "@zecos/validatorz" "0.0.1"
+
+"@zecos/validatorz@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@zecos/validatorz/-/validatorz-0.0.1.tgz#ee670d6748a085c8965a692ee8fcf2e3894a24c3"
+  integrity sha512-w38QHxcY7Le+tu8Urws7vcWbmn0cmqiKOUDFHV7SMmUAAmbkJUM6gFaEGfwnCDWip7B9kqrtQXfm6fXWn9cDGA==
+
 abab@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.3.tgz#623e2075e02eb2d3f2475e49f99c91846467907a"

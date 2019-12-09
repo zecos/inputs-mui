@@ -23,9 +23,10 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
 } from '@material-ui/pickers'
+import { IFieldzSingleState } from '@zecos/fieldz/types'
 
 
-const getErrorInfo = state => {
+const getErrorInfo = (state: IFieldzSingleState) => {
   const {errors, touched} = state
   const hasErrors = Boolean(errors.length)
   let errInfo = {}
@@ -65,7 +66,7 @@ export const useText = createInput(({helpers, props, state}) => {
   )
 })
 
-const renderOption = ([label, value]) => (
+const renderOption = ([label, value]: [string, any]) => (
   <MenuItem key={value} value={value}>{label}</MenuItem>
 )
 export const useSelect = createInput(({helpers, props, state}) => {
@@ -285,3 +286,10 @@ export const useSlider = createInput(({helpers, props, actions, state}) => {
     </>
 })
 
+export const useSimpleForm = createLayout(({props, inputs}) => {
+  return (
+    <form {...props}>
+      {inputs.map((Input, name) => <Input.Cmpt key={name} />)}
+    </form>
+  )
+})
