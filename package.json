@@ -23,6 +23,7 @@
   },
   "peerDependencies": {
     "@material-ui/core": "*",
+    "@zecos/inputs": "^0.0.8",
     "prop-types": "^15.5.4",
     "react": "*"
   },

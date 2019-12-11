@@ -17,3 +17,5 @@ declare module '*.svg' {
 }
 
 declare module "@material-ui/core";
+
+declare module "@zecos/inputs";

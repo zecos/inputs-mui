@@ -26,7 +26,7 @@ export default {
       sourcemap: true
     }
   ],
-  external: id => /react|material-ui/.test(id),
+  external: id => /react|material-ui|zecos\/inputs/.test(id),
   plugins: [
     postcss({
       modules: true

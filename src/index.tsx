@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createInput, createLayout } from "@zecos/inputs"
+import { createInput, createLayout, createMulti } from "@zecos/inputs"
 import {
   TextField,
   Select,
@@ -39,7 +39,7 @@ const getErrorInfo = (state: IFieldzSingleState) => {
   return errInfo
 }
 
-export const useText = createInput(({helpers, props, state}) => {
+export const TextInput = createInput(({helpers, props, state}) => {
   const {
     onChange,
     onBlur,
@@ -69,7 +69,7 @@ export const useText = createInput(({helpers, props, state}) => {
 const renderOption = ([label, value]: [string, any]) => (
   <MenuItem key={value} value={value}>{label}</MenuItem>
 )
-export const useSelect = createInput(({helpers, props, state}) => {
+export const SelectInput = createInput(({helpers, props, state}) => {
   const {
     onChange,
     onBlur,
@@ -104,7 +104,7 @@ const renderRadio = ([label, value, radioProps]) => (
     label={label}
   />
 )
-export const useRadio = createInput(({helpers, props, state}) => {
+export const RadioInput = createInput(({helpers, props, state}) => {
   const {
     label,
     name,
@@ -135,7 +135,7 @@ export const useRadio = createInput(({helpers, props, state}) => {
   )
 })
 
-export const useCheckbox = createInput(({helpers, props, actions, state}) => {
+export const CheckboxInput = createInput(({helpers, props, actions, state}) => {
   const {
     id,
     label,
@@ -161,7 +161,7 @@ export const useCheckbox = createInput(({helpers, props, actions, state}) => {
   )
 })
 
-export const useSwitch = createInput(({helpers, props, actions, state}) => {
+export const SwitchInput = createInput(({helpers, props, actions, state}) => {
   const {
     id,
     label,
@@ -186,8 +186,12 @@ export const useSwitch = createInput(({helpers, props, actions, state}) => {
   )
 })
 
-const renderErrors = (error, i)=> <FormHelperText key={i}>{error.toString()}</FormHelperText>
-export const useGroup = createLayout(({props, inputs, errors, helpers}) => {
+const renderErrors = (error, i) => (
+  <FormHelperText key={i}>
+    {error.toString()}
+  </FormHelperText>
+)
+export const GroupLayout = createLayout(({props, inputs, errors, helpers}) => {
   const Inputs = inputs
     .map(input => {
       const {Cmpt, helpers} = input
@@ -205,7 +209,7 @@ export const useGroup = createLayout(({props, inputs, errors, helpers}) => {
   )
 })
 
-export const useTimePicker = createInput(({helpers, props, actions, state}) => {
+export const TimePickerInput = createInput(({helpers, props, actions, state}) => {
   const {
     id,
     label,
@@ -231,7 +235,7 @@ export const useTimePicker = createInput(({helpers, props, actions, state}) => {
   );
 })
 
-export const useDatePicker = createInput(({helpers, props, actions, state}) => {
+export const DatePickerInput = createInput(({helpers, props, actions, state}) => {
   const {
     id,
     label,
@@ -258,7 +262,7 @@ export const useDatePicker = createInput(({helpers, props, actions, state}) => {
   )
 })
 
-export const useSlider = createInput(({helpers, props, actions, state}) => {
+export const SliderInput = createInput(({helpers, props, actions, state}) => {
   const {
     id,
     label,
@@ -286,10 +290,16 @@ export const useSlider = createInput(({helpers, props, actions, state}) => {
     </>
 })
 
-export const useSimpleForm = createLayout(({props, inputs}) => {
+export const SimpleFormLayout = createLayout(({props, inputs}) => {
   return (
     <form {...props}>
       {inputs.map((Input, name) => <Input.Cmpt key={name} />)}
     </form>
   )
+})
+
+export const Multi:any = createMulti(({inputs}) => {
+  return <>
+    {inputs.map((Input, i) => <Input.Cmpt key={i} />)}
+  </>
 })

@@ -849,6 +849,30 @@
   dependencies:
     "@zecos/validatorz" "0.0.1"
 
+"@zecos/inputs@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@zecos/inputs/-/inputs-0.0.8.tgz#3bccafd82bcfa8e721dcb661678644a3678ae304"
+  integrity sha512-+vh3CYZu3AmWkmROOIXuaU9C4b3JBRqYVXnaUR3eBzCkfWLPciiLKn3h5INdyPvt9G6bllt4/AIZOxPF964VoQ==
+  dependencies:
+    "@zecos/fieldz" "^0.0.8"
+    "@zecos/react-fieldz" "^0.2.2"
+    "@zecos/validators" "^0.0.2"
+
+"@zecos/react-fieldz@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@zecos/react-fieldz/-/react-fieldz-0.2.2.tgz#8f59da81c94bb07a5a80d4e1f5a2515f5391bd44"
+  integrity sha512-g20Tse3mK5F0kI7OjHE2UNu/fZ7tXvw3Pe2KoaxvgBzVmIn3IblUSV1NOtfZBl+/zMkeBD7JNO8k0ubYhg1U+Q==
+  dependencies:
+    "@zecos/fieldz" "^0.0.8"
+    validatorz "^2.3.3"
+
+"@zecos/validators@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@zecos/validators/-/validators-0.0.2.tgz#552dc003af1e5545c5c7cae35b077f0826e660fe"
+  integrity sha512-aQoSjl5szEgsKsLiG610fVsvH9y848R/pYELzuQ7Euo3oHPLFdjFq+fqEujxmQLkoXNK6ioJwhCdjZ2Fp79DlQ==
+  dependencies:
+    human-list "^0.0.1"
+
 "@zecos/validatorz@0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@zecos/validatorz/-/validatorz-0.0.1.tgz#ee670d6748a085c8965a692ee8fcf2e3894a24c3"
@@ -5003,6 +5027,11 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+
+human-list@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/human-list/-/human-list-0.0.1.tgz#5cb67732d496a0251aaec3c1ee39122c76111c25"
+  integrity sha512-ZcIwQzHESdbgMf8zMxzWMRCD3FD7uox5OiKhm8KMi8GuZcFJWoOmQOMSdMDR1Xo0tqDN397LkTUzdtFzKsmMNw==
 
 humanize-url@^1.0.0:
   version "1.0.1"
@@ -10436,6 +10465,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validatorz@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/validatorz/-/validatorz-2.3.3.tgz#920445b622562dcabc3ac9dc6902e161f0bf38bb"
+  integrity sha512-8g/VgYKz88VztfAQ3MmuJ1MY6yU/DuO3ObJhld9AJOO7yQ7/ueX36c6xjC+SlPJIvYCBnDR19lANJsyFjtumUg==
 
 vary@~1.1.2:
   version "1.1.2"
