@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createInput, createLayout, createMulti } from "@zecos/inputs"
+import { createInput, createLayout, createMulti } from "@zecos/input"
 import {
   TextField,
   Select,
@@ -16,7 +16,7 @@ import {
   Switch,
   Slider,
 } from '@material-ui/core'
-import { IFieldzSingleState } from '@zecos/fieldz/types'
+import { IFieldzSingleState } from '@zecos/field/types'
 
 
 const getErrorInfo = (state: IFieldzSingleState) => {

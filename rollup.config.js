@@ -6,7 +6,6 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
-import multiEntry from "rollup-plugin-multi-entry"
 
 import * as propTypes from 'prop-types'
 
@@ -43,7 +42,6 @@ export default {
     commonjs({
       namedExports: Object.keys(propTypes)
     }),
-    multiEntry(),
   ]
 }
 

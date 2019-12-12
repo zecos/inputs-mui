@@ -19,4 +19,4 @@ declare module '*.svg' {
 declare module "@material-ui/core";
 declare module "@material-ui/pickers";
 
-declare module "@zecos/inputs";
+declare module "@zecos/input";
