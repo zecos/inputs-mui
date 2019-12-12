@@ -6,29 +6,26 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
-import multiEntry from "rollup-plugin-multi-entry"
 
 import * as propTypes from 'prop-types'
 
-import pkg from './package.json'
-
 export default {
-  input: 'src/index.tsx',
+  input: 'src/pickers.tsx',
   output: [
     {
-      file: pkg.main,
+      file: "dist/pickers.js",
       format: 'cjs',
       exports: 'named',
       sourcemap: true
     },
     {
-      file: pkg.module,
+      file: "dist/pickers.es.js",
       format: 'es',
       exports: 'named',
       sourcemap: true
     }
   ],
-  external: id => /react|material-ui|zecos\/inputs/.test(id),
+  external: id => /react|material-ui|zecos\/inputs|pickers/.test(id),
   plugins: [
     postcss({
       modules: true
@@ -43,7 +40,6 @@ export default {
     commonjs({
       namedExports: Object.keys(propTypes)
     }),
-    multiEntry(),
   ]
 }
 
