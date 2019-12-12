@@ -41,8 +41,8 @@ const getErrorInfo = (state: IFieldzSingleState) => {
 
 export const TextInput = createInput(({helpers, props, state}) => {
   const {
-    onChange,
-    onBlur,
+    handleChange,
+    handleBlur,
     label,
     id,
   } = helpers
@@ -56,8 +56,8 @@ export const TextInput = createInput(({helpers, props, state}) => {
         label={label}
         id={id}
         margin="normal"
-        onChange={onChange}
-        onBlur={onBlur}
+        onChange={handleChange}
+        onBlur={handleBlur}
         value={value}
         fullWidth
         {...props}
@@ -71,8 +71,8 @@ const renderOption = ([label, value]: [string, any]) => (
 )
 export const SelectInput = createInput(({helpers, props, state}) => {
   const {
-    onChange,
-    onBlur,
+    handleChange,
+    handleBlur,
     label,
     id,
   } = helpers
@@ -85,9 +85,9 @@ export const SelectInput = createInput(({helpers, props, state}) => {
     <InputLabel id={`${id}-label`}>{label}</InputLabel>
     <Select
       id={id}
-      onChange={onChange}
+      onChange={handleChange}
       value={value}
-      onBlur={onBlur}
+      onBlur={handleBlur}
       fullWidth
       {...moreProps}
     >
@@ -108,8 +108,8 @@ export const RadioInput = createInput(({helpers, props, state}) => {
   const {
     label,
     name,
-    onChange,
-    onBlur,
+    handleChange,
+    handleBlur,
     title,
   } = helpers
   const { value } = state
@@ -123,8 +123,8 @@ export const RadioInput = createInput(({helpers, props, state}) => {
         aria-label={label}
         name={name}
         value={value}
-        onChange={onChange}
-        onBlur={onBlur}
+        onChange={handleChange}
+        onBlur={handleBlur}
         {...radioGroupProps}
       >
         {Object.entries(options).map(([label, key]) => {
