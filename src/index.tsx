@@ -191,8 +191,8 @@ const renderErrors = (error, i) => (
     {error.toString()}
   </FormHelperText>
 )
-export const GroupLayout = createLayout(({props, inputs, errors, helpers}) => {
-  const Inputs = inputs
+export const GroupLayout = createLayout(({props, items, errors, helpers}) => {
+  const Items = items
     .map(input => {
       const {Cmpt, helpers} = input
       return <Cmpt key={helpers.name} />
@@ -202,7 +202,7 @@ export const GroupLayout = createLayout(({props, inputs, errors, helpers}) => {
     <FormControl component="fieldset" error={!!errors.length}>
       <FormLabel component="legend">{helpers.title}</FormLabel>
       <FormGroup row={props.row || false}>
-        {Inputs}
+        {Items}
       </FormGroup>
       {errors.map(renderErrors)}
     </FormControl>
@@ -290,16 +290,18 @@ export const SliderInput = createInput(({helpers, props, actions, state}) => {
     </>
 })
 
-export const SimpleFormLayout = createLayout(({props, inputs}) => {
+export const SimpleFormLayout = createLayout(({props, items}) => {
   return (
     <form {...props}>
-      {inputs.map((Input, name) => <Input.Cmpt key={name} />)}
+      {items.map((Input, i) => (
+        <span key={i}><Input.Cmpt key={i} /></span>
+      ))}
     </form>
   )
 })
 
-export const Multi:any = createMulti(({inputs}) => {
+export const Multi:any = createMulti(({items}) => {
   return <>
-    {inputs.map((Input, i) => <Input.Cmpt key={i} />)}
+    {items.map((Input, i) => <Input.Cmpt key={i} />)}
   </>
 })
