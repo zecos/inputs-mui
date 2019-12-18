@@ -16,10 +16,11 @@ import {
   Switch,
   Slider,
 } from '@material-ui/core'
-import { IFieldzSingleState } from '@zecos/field/types'
+import { IFieldSingleState } from '@zecos/field/types'
+import styles from './styles.css'
 
 
-const getErrorInfo = (state: IFieldzSingleState) => {
+const getErrorInfo = (state: IFieldSingleState) => {
   const {errors, touched} = state
   const hasErrors = Boolean(errors.length)
   let errInfo = {}
@@ -231,9 +232,10 @@ export const SliderInput = createInput(({helpers, props, actions, state}) => {
     </>
 })
 
-export const SimpleFormLayout = createLayout(({props, items}) => {
+export const SimpleFormLayout = createLayout(({props, items, helpers}) => {
   return (
     <form {...props}>
+      <h3 className={styles.heading}>{helpers.title}</h3>
       {items.map((Input, i) => (
         <span key={i}><Input.Cmpt key={i} /></span>
       ))}
@@ -241,8 +243,20 @@ export const SimpleFormLayout = createLayout(({props, items}) => {
   )
 })
 
-export const Multi:any = createMulti(({items}) => {
-  return <>
+export const SimpleLayout = createLayout(({props, items, helpers}) => {
+  return (
+    <div {...props}>
+      <h3 className={styles.heading}>{helpers.title}</h3>
+      {items.map((Input, i) => (
+        <span key={i}><Input.Cmpt key={i} /></span>
+      ))}
+    </div>
+  )
+})
+
+export const Multi:any = createMulti(({items, helpers}) => {
+  return <div>
+    <h3 className={styles.heading}>{helpers.title}</h3>
     {items.map((Input, i) => <Input.Cmpt key={i} />)}
-  </>
+  </div>
 })
