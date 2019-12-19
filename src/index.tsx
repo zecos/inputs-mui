@@ -17,6 +17,7 @@ import {
   FormHelperText,
   Switch,
   Slider,
+  Button,
 } from '@material-ui/core'
 import { IFieldSingleState } from '@zecos/field/types'
 
@@ -234,9 +235,19 @@ export const GroupLayout = createLayout(({props, items, errors, helpers}) => {
 
 
 
+
+const defaultButtonProps = {
+  variant: "outlined",
+  type: "submit",
+}
 export const SimpleFormLayout = createLayout(({props, items, helpers, errors}) => {
+  const { buttonProps, ...moreProps } = props
+  const finalButtonProps = {
+    ...defaultButtonProps,
+    ...buttonProps,
+  }
   return (
-    <form {...props}>
+    <form {...moreProps}>
       <h3 className={styles.heading}>{helpers.title}</h3>
       <FormControl component="fieldset" error={!!errors.length}>
       {errors.map(renderErrors)}
@@ -244,6 +255,9 @@ export const SimpleFormLayout = createLayout(({props, items, helpers, errors}) =
       {items.map((Input, i) => (
         <span key={i}><Input.Cmpt key={i} /></span>
       ))}
+      <div>
+        <Button {...finalButtonProps}>Submit</Button>
+      </div>
     </form>
   )
 })
