@@ -19,7 +19,6 @@ import {
 import { IFieldSingleState } from '@zecos/field/types'
 import styles from './style.css'
 
-
 const getErrorInfo = (state: IFieldSingleState) => {
   const {errors, touched} = state
   const hasErrors = Boolean(errors.length)
