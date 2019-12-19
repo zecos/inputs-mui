@@ -1,167 +1,101 @@
-# TSDX React User Guide
+### @zecos/input-basic
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+`@zecos/input-basic` is a library for quickly creating form fields for rapid prototyping.
 
-> This TSDX setup is meant for developing React components (not apps!) that can be published to NPM. If you’re looking to build an app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+`@zecos/input-basic` is based on the [`@zecos/inputs`](https://npmjs.com/@zecos/inputs) library, which allows you to create your own UI input components with minimal boilerplate.
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
 
-## Commands
+#### Installation
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
+`yarn add @zecos/input-basic`
 
-The recommended workflow is to run TSDX in one terminal:
+`npm i -S @zecos/input-basic`
 
-```bash
-npm start # or yarn start
-```
+#### Example
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+![example](https://s5.gifyu.com/images/ezgif.com-crop762341ac25e7e4f4.gif)
 
-Then run the example inside another:
+```tsx
+import React from "react"
+import { nameValidator } from "@zecos/validators"
+import { Text, TextArea, Select } from "@zecos/input-basic"
 
-```bash
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
-```
+export const InputForm = () => {
+  const {FirstName, firstNameState} = Text({
+    validate: nameValidator,
+    name: "firstName"
+  })
 
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, [we use Parcel's aliasing](https://github.com/palmerhq/tsdx/pull/88/files).
+  const {DescribeYourself, describeYourselfState} = TextArea({
+    name: "describeYourself"
+  })
+  
+  const {FavoriteColor, favoriteColorState} = Select({
+    init: "blue",
+    name: "favoriteColor",
+  })
 
-To do a one-off build, use `npm run build` or `yarn build`.
+  return (
+    <form className="form">
+      {/* These are your inputs */}
+      <FirstName />
+      <DescribeYourself />
+      <FavoriteColor options={{Blue: "blue", Red: "red"}}/>
 
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is [set up for you](https://github.com/palmerhq/tsdx/pull/45/files) with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`. This runs the test watcher (Jest) in an interactive mode. By default, runs tests related to files changed since the last commit.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```shell
-/example
-  index.html
-  index.tsx       # test your component here in a demo app
-  package.json
-  tsconfig.json
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-#### React Testing Library
-
-We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
-
-### Rollup
-
-TSDX uses [Rollup v1.x](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### Travis
-
-_to be completed_
-
-### Circle
-
-_to be completed_
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+      {/* display the data */}
+      First Name State: {firstNameState.value}<br />
+      Describe Yourself: {describeYourselfState.value}<br />
+      Favorite Color: {favoriteColorState.value}
+    </form>
+  )
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+#### How it works
 
-## Module Formats
+You pick an input type:
 
-CJS, ESModules, and UMD module formats are supported.
+* `Text`
+* `TextArea`
+* `Select`
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+Then pass it its options:
 
-## Using the Playground
+*`name: string`: will determine the classname, label, etc. THIS MUST BE CAMEL CASE.
+*`validate?: fn => Error`: an optional function to return an array of errors to display. Do not throw the errors. This works seamlessly with the [@zecos/validators](https://npmjs.com/@zecos/validators) library.
+* `init?: string | number`: an optional initial value for the field. The default is "".
 
-```bash
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
+All together, for a `text` input, it looks like this:
+
+```tsx
+const [FirstName, firstNameState, firstNameActions] = text({
+  validate: nameValidator,
+  name: "firstName"
+})
 ```
 
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**!
+This returns an array of 3 values:
 
-## Deploying the Playground
+* `0`: the input component (<input />)
+* `1`: the field state, which includes:
+  * `value`: value of the field
+  * `touched`: whether or not the user has focused and blurred the input
+  * `errors`: the errors returned by your `validate` function
+  * `pristine`: whether or not the field data has been manipulated
+* `2`: the field actions, which include:
+  * `getState`: returns the same thing as `1`
+  * `setValue`: set the value of the field (also runs validation and sets pristine to false)
+  * `reset`: sets the field back to its original state (pristine, untouched, with the original init values)
+  * `setTouched`: set the `touched` value to `true`
+  
+So, you see, you can manipulate the field data yourself, but it also manages the field data for you.
 
-The Playground is just a simple [Parcel](https://parceljs.org) app, you can deploy it anywhere you would normally deploy that. Here are some guidelines for **manually** deploying with the Netlify CLI (`npm i -g netlify-cli`):
+The component can then be used as your input with no additional setup:
 
-```bash
-cd example # if not already in the example folder
-npm run build # builds to dist
-netlify deploy # deploy the dist folder
+```tsx
+<FirstName />
 ```
 
-Alternatively, if you already have a git repo connected, you can set up continuous deployment with Netlify:
+This is very powerful and enables you to eliminate a lot of the boilerplate of writing forms while maintaining flexibility.
 
-```bash
-netlify init
-# build command: yarn build && cd example && yarn && yarn build
-# directory to deploy: example/dist
-# pick yes for netlify.toml
-```
-
-## Named Exports
-
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
-
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
-
-## Usage with Lerna
-
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
-
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
-
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
-
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
-```
-
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+You can rapidly prototype your forms, and, when you outgrow and need more customization, it's very easy to write your own library with [`@zecos/inputs`](https://npmjs.com/@zecos/inputs).

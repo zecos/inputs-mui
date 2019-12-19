@@ -1,4 +1,6 @@
 import * as React from 'react'
+import styles from './styles.css'
+
 import { createInput, createLayout, createMulti } from "@zecos/input"
 import {
   TextField,
@@ -17,7 +19,6 @@ import {
   Slider,
 } from '@material-ui/core'
 import { IFieldSingleState } from '@zecos/field/types'
-import styles from './style.css'
 
 const getErrorInfo = (state: IFieldSingleState) => {
   const {errors, touched} = state
@@ -43,19 +44,17 @@ export const TextInput = createInput(({helpers, props, state}) => {
   const { value } = state
 
   return (
-    <div>
-      <TextField
-        {...getErrorInfo(state)}
-        label={label}
-        id={id}
-        margin="normal"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-        fullWidth
-        {...props}
-      />
-    </div>
+    <TextField
+      {...getErrorInfo(state)}
+      label={label}
+      id={id}
+      margin="normal"
+      onChange={handleChange}
+      onBlur={handleBlur}
+      value={value}
+      fullWidth
+      {...props}
+    />
   )
 })
 
