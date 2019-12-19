@@ -223,13 +223,15 @@ export const GroupLayout = createLayout(({props, items, errors, helpers}) => {
     })
   
   return (
-    <FormControl component="fieldset" error={!!errors.length}>
-      {errors.map(renderErrors)}
+    <div>
+      <FormControl component="fieldset" error={!!errors.length}>
+        {errors.map(renderErrors)}
+      </FormControl>
       <FormLabel component="legend">{helpers.title}</FormLabel>
       <FormGroup row={props.row || false}>
         {Items}
       </FormGroup>
-    </FormControl>
+    </div>
   )
 })
 
