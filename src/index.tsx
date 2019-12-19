@@ -17,7 +17,7 @@ import {
   Slider,
 } from '@material-ui/core'
 import { IFieldSingleState } from '@zecos/field/types'
-import styles from './styles.css'
+import styles from './style.css'
 
 
 const getErrorInfo = (state: IFieldSingleState) => {
