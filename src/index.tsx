@@ -243,17 +243,6 @@ export const SimpleFormLayout = createLayout(({props, items, helpers}) => {
   )
 })
 
-export const SimpleLayout = createLayout(({props, items, helpers}) => {
-  return (
-    <div {...props}>
-      <h3 className={styles.heading}>{helpers.title}</h3>
-      {items.map((Input, i) => (
-        <span key={i}><Input.Cmpt key={i} /></span>
-      ))}
-    </div>
-  )
-})
-
 export const Multi:any = createMulti(({items, helpers}) => {
   return <div>
     <h3 className={styles.heading}>{helpers.title}</h3>
