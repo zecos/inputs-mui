@@ -179,32 +179,7 @@ export const SwitchInput = createInput(({helpers, props, actions, state}) => {
     />
   )
 })
-
-const renderErrors = (error, i) => (
-  <FormHelperText key={i}>
-    {error.toString()}
-  </FormHelperText>
-)
-export const GroupLayout = createLayout(({props, items, errors, helpers}) => {
-  const Items = items
-    .map(input => {
-      const {Cmpt, helpers} = input
-      return <Cmpt key={helpers.name} />
-    })
-  
-  return (
-    <FormControl component="fieldset" error={!!errors.length}>
-      <FormLabel component="legend">{helpers.title}</FormLabel>
-      <FormGroup row={props.row || false}>
-        {Items}
-      </FormGroup>
-      {errors.map(renderErrors)}
-    </FormControl>
-  )
-})
-
-
-export const SliderInput = createInput(({helpers, props, actions, state, errors}) => {
+export const SliderInput = createInput(({helpers, props, actions, state}) => {
   const {
     id,
     label,
@@ -220,7 +195,6 @@ export const SliderInput = createInput(({helpers, props, actions, state, errors}
   return <>
     <FormLabel component="legend">{label}</FormLabel>
     <div style={heightStyle}>
-    {errors.map(renderErrors)}
     <Slider
       value={value}
       onChange={(_e, newVal) => actions.setValue(newVal)}
@@ -233,11 +207,38 @@ export const SliderInput = createInput(({helpers, props, actions, state, errors}
     </>
 })
 
+const renderErrors = (error, i) => (
+  <FormHelperText key={i}>
+    {error.toString()}
+  </FormHelperText>
+)
+export const GroupLayout = createLayout(({props, items, errors, helpers}) => {
+  const Items = items
+    .map(input => {
+      const {Cmpt, helpers} = input
+      return <Cmpt key={helpers.name} />
+    })
+  
+  return (
+    <FormControl component="fieldset" error={!!errors.length}>
+      {errors.map(renderErrors)}
+      <FormLabel component="legend">{helpers.title}</FormLabel>
+      <FormGroup row={props.row || false}>
+        {Items}
+      </FormGroup>
+    </FormControl>
+  )
+})
+
+
+
 export const SimpleFormLayout = createLayout(({props, items, helpers, errors}) => {
   return (
     <form {...props}>
       <h3 className={styles.heading}>{helpers.title}</h3>
+      <FormControl component="fieldset" error={!!errors.length}>
       {errors.map(renderErrors)}
+      </FormControl>
       {items.map((Input, i) => (
         <span key={i}><Input.Cmpt key={i} /></span>
       ))}
@@ -245,10 +246,13 @@ export const SimpleFormLayout = createLayout(({props, items, helpers, errors}) =
   )
 })
 
+
 export const Multi:any = createMulti(({items, helpers, errors}) => {
   return <div>
     <h3 className={styles.heading}>{helpers.title}</h3>
+    <FormControl component="fieldset" error={!!errors.length}>
     {errors.map(renderErrors)}
+    </FormControl>
     {items.map((Input, i) => <Input.Cmpt key={i} />)}
   </div>
 })
