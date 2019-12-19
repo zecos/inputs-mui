@@ -1,7 +1,6 @@
 {
-  "name": "@zecos/input-mui",
-  "homepage": "https://zecos.github.io/input-mui",
-  "author": "Zane Hitchcox",
+  "name": "inputs-basic-example",
+  "homepage": "https://zecos.github.io/inputs-basic",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
