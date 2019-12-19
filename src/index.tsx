@@ -204,7 +204,7 @@ export const GroupLayout = createLayout(({props, items, errors, helpers}) => {
 })
 
 
-export const SliderInput = createInput(({helpers, props, actions, state}) => {
+export const SliderInput = createInput(({helpers, props, actions, state, errors}) => {
   const {
     id,
     label,
@@ -220,6 +220,7 @@ export const SliderInput = createInput(({helpers, props, actions, state}) => {
   return <>
     <FormLabel component="legend">{label}</FormLabel>
     <div style={heightStyle}>
+    {errors.map(renderErrors)}
     <Slider
       value={value}
       onChange={(_e, newVal) => actions.setValue(newVal)}
@@ -232,10 +233,11 @@ export const SliderInput = createInput(({helpers, props, actions, state}) => {
     </>
 })
 
-export const SimpleFormLayout = createLayout(({props, items, helpers}) => {
+export const SimpleFormLayout = createLayout(({props, items, helpers, errors}) => {
   return (
     <form {...props}>
       <h3 className={styles.heading}>{helpers.title}</h3>
+      {errors.map(renderErrors)}
       {items.map((Input, i) => (
         <span key={i}><Input.Cmpt key={i} /></span>
       ))}
@@ -243,9 +245,10 @@ export const SimpleFormLayout = createLayout(({props, items, helpers}) => {
   )
 })
 
-export const Multi:any = createMulti(({items, helpers}) => {
+export const Multi:any = createMulti(({items, helpers, errors}) => {
   return <div>
     <h3 className={styles.heading}>{helpers.title}</h3>
+    {errors.map(renderErrors)}
     {items.map((Input, i) => <Input.Cmpt key={i} />)}
   </div>
 })
