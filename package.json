@@ -1,6 +1,6 @@
 {
   "name": "@zecos/input-mui",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "`@zecos/inputs` is a library for quickly creating form fields for rapid prototyping.",
   "author": "zecos",
   "license": "MIT",
