@@ -137,19 +137,21 @@ export const CheckboxInput = createInput(({helpers, props, actions, state}) => {
   const boolVal = Boolean(value)
 
   return (
-    <FormControlLabel
-      id={id}
-      control={
-        <Checkbox
-          checked={boolVal}
-          onChange={() => actions.setValue(!boolVal)}
-          value={boolVal}
-          color="primary"
-          {...props}
-        />
-      }
-      label={label}
-    />
+    <div>
+      <FormControlLabel
+        id={id}
+        control={
+          <Checkbox
+            checked={boolVal}
+            onChange={() => actions.setValue(!boolVal)}
+            value={boolVal}
+            color="primary"
+            {...props}
+          />
+        }
+        label={label}
+      />
+    </div>
   )
 })
 
@@ -162,19 +164,21 @@ export const SwitchInput = createInput(({helpers, props, actions, state}) => {
   const boolVal = Boolean(value)
 
   return (
-    <FormControlLabel
-      id={id}
-      control={
-        <Switch
-          checked={boolVal}
-          onChange={() => actions.setValue(!boolVal)}
-          value={boolVal}
-          color="primary"
-          {...props}
-        />
-      }
-      label={label}
-    />
+    <div>
+      <FormControlLabel
+        id={id}
+        control={
+          <Switch
+            checked={boolVal}
+            onChange={() => actions.setValue(!boolVal)}
+            value={boolVal}
+            color="primary"
+            {...props}
+          />
+        }
+        label={label}
+      />
+    </div>
   )
 })
 export const SliderInput = createInput(({helpers, props, actions, state}) => {
