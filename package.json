@@ -1,6 +1,6 @@
 {
   "name": "@zecos/input-mui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "rapidly prototype react material design form inputs",
   "author": "Zane Hitchcox",
   "license": "MIT",
